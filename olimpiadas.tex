@@ -1,29 +1,409 @@
+
 \documentclass[11pt]{scrartcl}
 \usepackage[sexy]{evan}
 
 \title{Contest Collections}
 \author{Guilherme}
 \date{27 Octuber 2026}
-\maketitle
 
 \begin{document}
-\section{Ideas for Graph theory}
-Some ideas that help in problems.
-\begin{itemize}
-  \ii
-\end{itemize}
+
+\maketitle
+
+\section{Walkthroughs Graph theory}
+
+\begin{problem}[HMMT February 2016]
+  Let $n >1$ be an odd integer. On an $n\times n$ chessboard the center square and four corners are deleted. We wish to
+  group the remaining $n^2-5$ squares into $\frac{1}{2} (n^2 -5)$ pairs, such that the two squares in each pair intersect
+  at exactly one point ($i.e.$ they are diagonally adjacent, sharing a single corner)
+For which odd integers $n > 1$ is this possible?
+\end{problem}
+
+\textbf{\color{green!15!darkgray}{Walkthrough.}}
+Here I will follow the walkthrough by evan chen
+\begin{soln}
+
+\noindent
 
 \begin{center}
 \begin{asy}
-  size(6cm);
-  draw(unitcircle);
-  draw((0.3,0.3)--(0.3,0.4));
-  draw((-0.3,0.3)--(-0.3,0.4));
-  draw((0.6,-0.2)..(0,-0.4)..(-0.6,-0.2));
+
+size(2cm);
+
+
+dot((0.5,0.5), black);
+dot((2.5,0.5), black);
+dot((0.5,2.5), black);
+dot((1.5,1.5), black);
+dot((2.5,2.5), black);
+
+int n=3;
+for (int i = 0; i<=n; ++i)
+{draw((i,0)--(i,n), black);
+draw((0,i)--(n,i), black);}
+
+
+draw((0.5,1.5)--(1.5,0.5), red);
+draw((1.5,2.5)--(2.5,1.5), red);
+\end{asy}
+\end{center}
+
+This representation look a situation of the problem. As shown, the case first $n=3$ can do.
+
+\begin{walk}
+\item Can one do $n=3$?
+  Yes, its possible.
+
+\item Can one do $n=5$?
+
+\begin{minipage}{0.3\textwidth}
+\begin{asy}
+size(4cm);
+
+
+dot((0.5,4.5), black);
+dot((4.5,4.5), black);
+dot((2.5,2.5), black);
+dot((0.5,0.5), black);
+dot((4.5,0.5), black);
+
+dot((1.5,4.5), red);
+dot((4.5,3.5), red);
+dot((3.5,0.5), red);
+dot((0.5,1.5), red);
+
+int n=5;
+for (int i = 0; i<=n; ++i)
+{draw((i,0)--(i,n), black);
+draw((0,i)--(n,i), black);}
+
+draw((1.5,4.5)--(0.5,3.5), red);
+draw((3.5,4.5)--(4.5,3.5), red);
+draw((4.5,1.5)--(3.5,0.5), red);
+draw((1.5,0.5)--(0.5,1.5), red);
+
+\end{asy}
+\end{minipage}
+\begin{minipage}{0.3\textwidth}
+\begin{asy}
+size(4cm);
+
+dot((0.5,4.5), black);
+dot((4.5,4.5), black);
+dot((2.5,2.5), black);
+dot((0.5,0.5), black);
+dot((4.5,0.5), black);
+
+fill(box((1,3), (2,4)), gray);
+fill(box((3,3), (4,4)), gray);
+fill(box((3,1), (4,2)), gray);
+fill(box((1,1), (2,2)), gray);
+
+dot((1.5,4.5), red);
+dot((4.5,3.5), red);
+dot((3.5,0.5), red);
+dot((0.5,1.5), red);
+
+dot((2.5,4.5), red);
+dot((4.5,2.5), red);
+dot((2.5,0.5), red);
+dot((0.5,2.5), red);
+
+
+int n=5;
+for (int i = 0; i<=n; ++i)
+{draw((i,0)--(i,n), black);
+draw((0,i)--(n,i), black);}
+
+draw((1.5,4.5)--(0.5,3.5), red);
+draw((3.5,4.5)--(4.5,3.5), red);
+draw((4.5,1.5)--(3.5,0.5), red);
+draw((1.5,0.5)--(0.5,1.5), red);
+
+draw((2.5,4.5)--(1.5,3.5), red);
+draw((3.5,3.5)--(4.5,2.5), red);
+draw((3.5,1.5)--(2.5,0.5), red);
+draw((1.5,1.5)--(0.5,2.5), red);
+
+
+
+
+\end{asy}
+\end{minipage}
+
+\par Please note that we are back to the case $n=3$.
+
+\begin{center}
+\begin{asy}
+size(3cm);
+
+
+dot((1.5,1.5), black);
+
+dot((1.5,2.5), red);
+dot((1.5,0.5), red);
+
+fill(box((0,0), (1,1)), gray);
+fill(box((2,0), (3,1)), gray);
+fill(box((2,2), (3,3)), gray);
+fill(box((0,2), (1,3)), gray);
+
+int n=3;
+for (int i = 0; i<=n; ++i)
+{draw((i,0)--(i,n), black);
+draw((0,i)--(n,i), black);}
+
+
+draw((1.5,2.5)--(0.5,1.5), red);
+draw((2.5,1.5)--(1.5,0.5), red);
+
+\end{asy}
+\end{center}
+
+\paragraph{My point of view} This moment my strategies is connections of diagonally adjacent parallel to the center.
+I think that is possible say all cases can do return back to the $n=3$ case.
+
+\item Can one do $n=7$?
+\par I try many times and can not do. I will get rid of it to draw a $7\times 7$.
+
+\item Find a coloring of the squares by black and white so that diagonally adjacent squares are opposite colors.
+
+The representations with balls ever parallel to the center.
+
+\begin{center}
+\begin{asy}
+import patterns;
+add("hach", hatch(1.5mm, NE, black+0.4));
+size(3cm);
+
+fill(box((1,4), (2,5)), pattern("hach"));
+fill(box((2,4), (3,5)), pattern("hach"));
+fill(box((4,3), (5,4)), pattern("hach"));
+fill(box((4,2), (5,3)), pattern("hach"));
+fill(box((3,0), (4,1)), pattern("hach"));
+fill(box((2,0), (3,1)), pattern("hach"));
+fill(box((0,1), (1,2)), pattern("hach"));
+fill(box((0,2), (1,3)), pattern("hach"));
+
+dot((0.5,4.5), black);
+dot((4.5,4.5), black);
+dot((2.5,2.5), black);
+dot((0.5,0.5), black);
+dot((4.5,0.5), black);
+
+int n=5;
+for (int i = 0; i<=n; ++i)
+{draw((i,0)--(i,n), black);
+draw((0,i)--(n,i), black);}
+\end{asy}
+\end{center}
+
+\par The squares that to be left over in the center may have any fillers.
+
+\item Use this to narrow down the set of possible n to two value
+\par Why make to narrow down the set for two possible?
+
+
+\begin{center}
+\begin{asy}
+import patterns;
+add("hach", hatch(1.5mm, NE, black+0.4));
+size(6cm);
+
+fill(box((1,6), (2,7)), pattern("hach"));
+fill(box((2,6), (3,7)), pattern("hach"));
+fill(box((6,5), (7,6)), pattern("hach"));
+fill(box((6,4), (7,5)), pattern("hach"));
+fill(box((5,0), (6,1)), pattern("hach"));
+fill(box((4,0), (5,1)), pattern("hach"));
+fill(box((0,1), (1,2)), pattern("hach"));
+fill(box((0,2), (1,3)), pattern("hach"));
+
+fill(box((4,6), (5,7)), pattern("hach"));
+fill(box((6,2), (7,3)), pattern("hach"));
+fill(box((2,0), (3,1)), pattern("hach"));
+fill(box((0,4), (1,5)), pattern("hach"));
+dot((0.5,6.5), black);
+dot((6.5,6.5), black);
+dot((6.5,0.5), black);
+dot((0.5,0.5), black);
+dot((3.5,3.5), black);
+
+int n=7;
+for (int i = 0; i<=n; ++i)
+{draw((i,0)--(i,n), black);
+draw((0,i)--(n,i), black);}
+
+draw((1.5,6.5)--(0.5,5.5), red);
+draw((5.5,6.5)--(6.5,5.5), red);
+draw((6.5,1.5)--(5.5,0.5), red);
+draw((1.5,0.5)--(0.5,1.5), red);
+
+draw((2.5,6.5)--(1.5,5.5), red);
+draw((5.5,5.5)--(6.5,4.5), red);
+draw((5.5,1.5)--(4.5,0.5), red);
+draw((1.5,1.5)--(0.5,2.5), red);
+
+draw((4.5,6.5)--(3.5,5.5), red);
+draw((6.5,2.5)--(5.5,3.5), red);
+draw((2.5,0.5)--(3.5,1.5), red);
+draw((0.5,4.5)--(1.5,3.5), red);
+
+label("$\cdots$", (3.5,0.5), black);
+label("$\cdots$", (3.5,6.5), black);
+label("$\vdots$", (6.5,3.5), black);
+label("$\vdots$", (0.5,3.5), black);
+
 \end{asy}
 \end{center}
 
 
+\paragraph{By Induction.} Repeating the algorithm, let's  to arrive in the case $n=3$ with different conditions.
+
+\noindent
+
+\begin{center}
+\begin{asy}
+size(2cm);
+
+dot((0.5,1.5), orange);
+dot((1.5,0.5), orange);
+dot((1.5,1.5), black);
+dot((1.5,2.5), orange);
+dot((2.5,1.5), orange);
+
+int n=3;
+for (int i = 0; i<=n; ++i)
+{draw((i,0)--(i,n), black);
+draw((0,i)--(n,i), black);}
+
+\end{asy}
+\end{center}
+
+\par With we're may, don't are possible for any $n$ odd integer $n>5$.
+
+\item Wrap up the problem using your earlier work.
+
+\par Therefore conclusions that $n=3$ and $n=5$ are units solutions.
+
+\end{walk}
+
+\end{soln}
+
+\begin{problem}[\href{https://artofproblemsolving.com/community/c5h1823554p12189456}{USAJMO 2019}]
+There are $a+b$ bowls arranged in a row, numbered $1$ through $a+b$, where $a$ and $b$ are given positive integers.
+Initially, each of the first $a$ bowls contains an apple, and each of the last $b$ bowls contains a pear. A legal move
+consists of moving an apple from bowl $i$ to bowl $i+1$ and a pear from bowl $j$ to bowl $j-1$, provided that the
+different $i-j$ is even. We permit multiple fruits in the same bowl at the same time. The goal is to end up with the
+first $b$ bowls each containing a pear and the last $a$ bowls each containing an apple. Show that this is possible if
+and only if the product $ab$ is even.
+\end{problem}
+
+\paragraph{My solution.} This is problem before see the walkthrough of the Evan. I got it solving the problem in little
+plus of 1 hour, but don't know how to put it here. Hence, I put it here solution by evan with my notes.\par
+Look the walkthrough, I see that my solution is wasn't entirely accurate.
+
+\begin{soln}
+\item\textbf{\color{green!15!darkgray}{Walkthrough.}}  First we show that if $ab$ is even then the goal is possible. We prove the result by induction on $a + b$.
+
+\begin{remark}
+  This idea is very very useful. I really don't would think this strategies but, it is good. Verify a thing that is
+  possible could help to look because it works.
+\end{remark}
+
+\begin{walk}
+\item If $\min(a,b) \ge 1$, and $a$ and $b$ are opposite parity, show that in one swap one can reduce from $(a,b)$
+to $(a-1,b-1)$.
+
+\item If $\min (a,b) \ge 2$, and $a$ and $b$ are both even, show that in two swaps one can reduce from $(a,b)$ to
+$(a-2,b-2)$.
+
+\item Formulate a set of base cases and complete the proof via induction.
+\end{walk}
+Conversely, we need to show that the task is impossible when $ab$ is odd.
+
+\begin{walk}[start=4]
+\item Let $X$ denote the number of apples in odd-numbered bowls, and $Y$  denote the number of pears ind odd-numbered
+bowls. Find a relation between $X$ and $Y$ that does not change under the operation.
+
+\item Use this to show that the task is impossible when $ab$ is odd.
+\end{walk}
+
+\item\textbf{\color{red!40!darkgray}{Solution.}}
+
+\begin{itemize}
+\item If $\min(a,b) =0$ there is nothing to check.
+
+\item If $\min (a,b)=1$, say $a=1$, then $b$ is even  and we can swap the (only) leftmost apple with the rightmost
+pear by working only with those fruits.
+
+\begin{remark}
+In fact, we can repeat the process trading $m - p - p$, whenever have one even-numbers of pears to right of one apple.
+\end{remark}
+
+
+\item Now assume $\min(a, b) \ge 2$ and $a + b$ is odd. Then we can swap the leftmost apple with rightmost pear by working
+only with those fruits, reducing to the situation of $(a-1, b-1)$ which is possible by induction (at least one of
+them is even).
+
+\begin{remark}
+Say $a$ is odd and $b$ is even.\par
+We have the configuration: $\{m,m,\ldots,m,p,\ldots,p,p\}$. We may trade the leftmost apple with rightmost pear, $i=1$
+and $j=$odd, $j-i$ will be even. With this, reducing to the situation for $(a-1,b-1)$, which is possible by induction.
+\end{remark}
+
+\item Finally, assume $\min(a,b) \ge 2$ and $a+b$ is even ($i.e$ $a$ and $b$ are both even). Then we can swap the apple in
+position $1$ with the pear in position $a+b-1$, and apple in position $2$ with the pear in the position $a+b$.
+This reduce to the situation of $(a-2,b-2)$ which is also possible by induction.
+
+\begin{remark}
+I don't many thing to talk for the item, I think that this feature is one of the but I want for me. See that in the
+problem \href{https://artofproblemsolving.com/community/c6h3181582p28989993}{OBM 2023/1}. The solution of the Luciano
+Castro by \href{https://www.youtube.com/watch?v=rPlnud-oexQ&t=4s}{Matematicamente} is very resilient. I will study
+to the solution.
+
+
+\end{remark}
+\end{itemize}
+
+Now we show that the result is impossible if $ab$ is odd. Define\par
+\begin{center}
+$X=$number apples in odd-numbered bowls\\
+$Y=$number pears in odd-numbered bowls.
+\end{center}
+
+Note that $X-Y$ does not change under this operation. However, if $a$ and $b$  are odd, then we initially have
+$X=\frac{1}{2}(a+1)$ and $Y=\frac{1}{2}(b-1)$, while the target position has $X=\frac{1}{2}(a-1)$ and
+$Y=\frac{1}{2}(b+1)$. So, when $ab$ id odd this is not possible.
+
+\end{soln}
+
+\begin{remark}[Evan]
+Remark. Another proof that $ab$ must be even is as follows.\par
+First, note that apples only move right and pears only move left, a successful operation must take exactly $ab$ moves.
+So it is enough to prove that the $number$ $of$ $moves$ made must be even.\par
+However, the number of fruits in odd-numbered
+bowls either increases by $+2$ or $-2$ in each move (according to whether $i$ and $j$ are both even or both odd), and
+since it ends up being the same at the end, the number of move must be even.\par
+Alternatively, as pointed out in the official solutions, one can consider the
+sums of squares of positions of fruits. The quantity changes by\par
+
+\begin{align*}
+  [(i+1)^2+(j-1)^2] - (i^2+j^2) = 2(i-j) + 2 \equiv 2 \pmod{4}
+\end{align*}
+
+at each step, and eventually the sums of squares returns to zero, as needed.
+\end{remark}
+
+\paragraph{Double Counting} The form that he used by conclusion the solution was very ingenious, a double counting is
+one walk to think in this idea. The normal counting is $X=\frac{1}{2}(a+1)$ since $a$ is odd, hence, there will be more
+odd-numbered bowls than even-numbered bowls. $Y=\frac{1}{2}(b-1)$ since $a+1$ is even, therefore, a counting of bowls
+with pears starting in even bowl and ends also in even bowls. \par
+``{\textbf{While the target position}} ", why will be this target position?\par
+The target position in my point of view is when swap the leftmost apple with the rightmost pear. The apple in rightmost
+position $a+b$ is even and pear in leftmost position $1$ is odd, as soon as the swap is done, $X-1=\frac{1}{2}(a-1)$
+and $Y+1=\frac{1}{2}(a+1)$. What changes everything.\par
+I'll speak again, beautiful idea to ends of the problem.
 
 
 \end{document}
